@@ -25,6 +25,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3001
+      - BACKEND_URL=https://anythink-market-c175f-api.herokuapp.com/api
     working_dir: /usr/src
     volumes:
       - ./:/usr/src/
