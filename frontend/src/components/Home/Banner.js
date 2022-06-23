@@ -3,7 +3,7 @@ import logo from "../../imgs/logo.png";
 
 const Banner = ({ onSearch }) => {
   const onInputChange = (value) => {
-    if (value.length <= 3) {
+    if (value.length < 3) {
       onSearch(undefined);
     } else {
       onSearch(value);
