@@ -17,12 +17,16 @@ const Banner = ({ onSearch }) => {
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div>
-          <span id="get-part">A place to <button onClick={() => setShowSearch(true)}>get</button></span>
-          {showSearch && <input
-            id="search-box"
-            placeholder="Type here to search..."
-            onChange={(e) => onInputChange(e.target.value)}
-          />}
+          <span id="get-part">
+            A place to <button onClick={() => setShowSearch(true)}>get</button>
+          </span>
+          {showSearch && (
+            <input
+              id="search-box"
+              placeholder="Type here to search..."
+              onChange={(e) => onInputChange(e.target.value)}
+            />
+          )}
           <span> the cool stuff.</span>
         </div>
       </div>
