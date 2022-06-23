@@ -22,9 +22,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onClickTag: (tag, pager, payload) =>
     dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
-  onSearch: (payload) => {
-    return dispatch({ type: UPDATE_ITEMS, payload });
-  },
+  onSearch: (searchTerm, payload) => dispatch({ type: UPDATE_ITEMS, searchTerm, payload }),
   onLoad: (tab, pager, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
@@ -44,7 +42,7 @@ class Home extends React.Component {
 
   async onSearch(searchTerm) {
     const items = await agent.Items.all(0, searchTerm);
-    this.props.onSearch(items);
+    this.props.onSearch(searchTerm, items);
   }
 
   componentWillUnmount() {

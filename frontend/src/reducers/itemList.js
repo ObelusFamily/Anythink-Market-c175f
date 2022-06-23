@@ -50,6 +50,7 @@ const reducer = (state = {}, action) => {
     case UPDATE_ITEMS:
       return {
         ...state,
+        searchTerm: action.searchTerm,
         items: action.payload.items,
         itemsCount: action.payload.itemsCount,
         tab: null,
