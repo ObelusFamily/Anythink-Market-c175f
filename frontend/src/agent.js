@@ -8,6 +8,7 @@ const API_ROOT =
     ? "http://localhost:3000/api"
     : process.env.BACKEND_URL;
 
+
 const encode = encodeURIComponent;
 const responseBody = (res) => res.body;
 
