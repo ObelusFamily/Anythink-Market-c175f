@@ -52,4 +52,6 @@ mongoose.connect(process.env.MONGODB_URI);
             .then(res => res._id);
     }));
     console.log('itemIds', itemIds);
+
+    process.exit(0);
 })();
