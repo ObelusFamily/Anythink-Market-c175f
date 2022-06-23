@@ -17,8 +17,8 @@ const Banner = ({ onSearch }) => {
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div>
-          <span id="get-part">
-            A place to <button onClick={() => setShowSearch(true)}>get</button>
+          <span id="get-part" onClick={() => setShowSearch(true)}>
+            A place to get
           </span>
           {showSearch && (
             <input
