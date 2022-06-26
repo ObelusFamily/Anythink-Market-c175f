@@ -76,6 +76,7 @@ router.get("/", auth.optional, function(req, res, next) {
           .limit(Number(limit))
           .skip(Number(offset))
           .sort({ createdAt: "desc" })
+          .populate('seller')
           .exec(),
         Item.count(query).exec(),
         req.payload ? User.findById(req.payload.id) : null
@@ -84,17 +85,9 @@ router.get("/", auth.optional, function(req, res, next) {
         var itemsCount = results[1];
         var user = results[2];
 
-        const userIds = [...new Set(items.map(item => item.seller._id))];
-        const users = await User.find({_id: { $in: userIds}}).exec();
-        const userByIds = users.reduce((acc, curr) => {
-          acc[curr._id] = curr;
-          return acc;
-        }, {});
-
         return res.json({
           items: await Promise.all(
             items.map(async function(item) {
-              item.seller = userByIds[item.seller];
               return item.toJSONFor(user);
             })
           ),
