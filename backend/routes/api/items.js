@@ -83,10 +83,18 @@ router.get("/", auth.optional, function(req, res, next) {
         var items = results[0];
         var itemsCount = results[1];
         var user = results[2];
+
+        const userIds = [...new Set(items.map(item => item.seller._id))];
+        const users = await User.find({_id: { $in: userIds}}).exec();
+        const userByIds = users.reduce((acc, curr) => {
+          acc[curr._id] = curr;
+          return acc;
+        }, {});
+
         return res.json({
           items: await Promise.all(
             items.map(async function(item) {
-              item.seller = await User.findById(item.seller);
+              item.seller = userByIds[item.seller];
               return item.toJSONFor(user);
             })
           ),
